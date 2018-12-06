@@ -15,6 +15,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/cretz/bine/torutil"
 	"github.com/cretz/bine/torutil/ed25519"
 	"github.com/ipsn/go-torfluxdb/proxy"
 )
@@ -70,6 +71,8 @@ func main() {
 	defer cancel()
 
 	log.Print("Starting Tor proxy, this might take a minute or so...")
+	log.Printf("Endpoint will be published at http://%s.onion", torutil.OnionServiceIDFromPrivateKey(key))
+
 	proxy, err := proxy.New(ctx, key, *influxdbFlag)
 	if err != nil {
 		log.Printf("Failed to start Tor proxy: %v", err)
@@ -78,6 +81,6 @@ func main() {
 	defer proxy.Close()
 
 	// Report the service opened and start serving requests
-	log.Printf("InfluxDB Tor proxy online at %s", proxy.URL())
+	log.Printf("InfluxDB Tor proxy online at http://%s.onion", proxy.ID())
 	fmt.Println(proxy.Serve())
 }

@@ -29,8 +29,8 @@ func New(ctx context.Context, key crypto.PrivateKey, backend string) (*Proxy, er
 	if err != nil {
 		return nil, err
 	}
-	// Create an onion service to listen on (show as 8086)
-	service, err := gateway.Listen(ctx, &tor.ListenConf{RemotePorts: []int{8086}, Version3: true, Key: key})
+	// Create an onion service to listen on (show as 80 to keep URLs simple)
+	service, err := gateway.Listen(ctx, &tor.ListenConf{RemotePorts: []int{80}, Version3: true, Key: key})
 	if err != nil {
 		gateway.Close()
 		return nil, err
@@ -51,8 +51,8 @@ func (p *Proxy) Close() error {
 }
 
 // URL retrieves the onion URL of the proxy.
-func (p *Proxy) URL() string {
-	return "http://" + p.service.ID + ".onion:8086"
+func (p *Proxy) ID() string {
+	return p.service.ID
 }
 
 // Serve accepts incoming connections, creating a new service goroutine for each.
