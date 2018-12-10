@@ -6,7 +6,7 @@ Without going into technical details, the crux of this project is to tumble Infl
 
 ![Demo](https://raw.githubusercontent.com/ipsn/go-torfluxdb/master/demo.png)
 
-For a detailed presentation and tutorial, please read the announcement blog post (will be linked shortly)!
+For a detailed presentation and tutorial, please read the [announcement blog post](https://medium.com/interplanetary-social-network/torfluxdb-anonymous-metrics-from-go-ce4f443e01fc)!
 
 ## Quickstart
 
@@ -70,7 +70,7 @@ You can fine tune the proxy with the following:
 
 If you don't have a private key yet (i.e. `TORFLUXDB_ONIONKEY` is empty), the proxy will generate an ephemeral one, that you can request to be printed out with the `--printkey` flag.
 
-Setting the private key yourself will ensure the same onion address being produced on restarts. Please be aware however, that **Tor's private key format is [incompatible](https://stackoverflow.com/questions/44810708/ed25519-public-result-is-different) with Go's `ed25519` library**, so you'll need to let the proxy generate the key for you.
+Setting the private key yourself will ensure the same onion address being produced on restarts. Please be aware that **Tor's private key format is [incompatible](https://stackoverflow.com/questions/44810708/ed25519-public-result-is-different) with Go's `ed25519` library**, so you'll need to let the proxy generate the key for you.
 
 ## Credits
 
